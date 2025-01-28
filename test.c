@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 21:10:33 by amashhad          #+#    #+#             */
-/*   Updated: 2025/01/28 09:35:21 by amashhad         ###   ########.fr       */
+/*   Created: 2025/01/25 03:23:54 by amashhad          #+#    #+#             */
+/*   Updated: 2025/01/28 05:51:54 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
 
-void	ft_putstr_fd(char *s, int fd)
+typedef struct s_list
 {
-	size_t	i;
+	int	x;
+	int	y;
+	struct s_list *next;
+}			t_list;
 
-	i = 0;
-	while (s[i] != '\0')
+int	main()
+{
+	t_list	test;
+
+	test.x = 1;
+	test.y = 2;
+	int	i = 10;
+	while (i > 0)
 	{
-		write(fd, &s[i], 1);
-		i++;
+		test.x++;
+		test.y--;
+		printf("x:%d\ny:%d\n", test.x, test.y
+		test.x = );
+		i--;
 	}
-	if (fd == 0 || fd == 1 || fd == 2)
-		write(fd, "\n", 1);
 }

@@ -6,16 +6,19 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 05:20:37 by amashhad          #+#    #+#             */
-/*   Updated: 2025/01/19 19:39:37 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:36:54 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <unistd.h>
 
 int		close_window(int keycode)
 {
 	if (keycode == XK_Escape)
-		exit (0);
+	{
+		exit (1);
+	}
 	return (0);
 }
 
@@ -23,23 +26,23 @@ int		main()
 {
 	void	*screen;
 	void	*window;
-	void	*img;
-	int		img_height = 500;
-	int		img_width = 500;
+	int		imgwidth = 100;
+	int		imgheight = 100;
+	void	*character;
 
-	//if (argc != 2 || argv[1] == NULL)
-	//return (write(2, "Wrong Number of args\n", 21));
-	//if (ft_strncmp(ft_strrchr(argv[1], '.'), ".ber", 5) != 0)
-	//return (write(2, "Incorrect Map Format\n", 21));
-	//ft_printf("arg no.: %d\nargs: %s\n", argc, argv[1]);
 	screen = mlx_init();
-	window = mlx_new_window(screen, 1350, 1350, "hello");
-	img = image_setup(screen, &img_height, &img_width);
-	if (!img)
-		return (0);
-	mlx_key_hook(window, close_window, NULL);
-	mlx_hook(window, 2, 1L<<17, close, &window);
-	mlx_put_image_to_window(screen, window, img, 100, 100);
+	if (!screen)
+		return (write(2, "screenerr\n", 10));
+	window = mlx_new_window(screen, 1000, 1000, "test");
+	if (!window)
+		return (write(2, "windowerr\n", 10));
+	if (ft_putwalls(screen, window) == 0)
+	{
+		character = mlx_xpm_file_to_image(screen, "./assets/TheInvokerLeft.xpm", &imgwidth, &imgheight);
+		if (!character)
+			return (write(2, "charerr\n", 8));
+		mlx_put_image_to_window(screen, window, character, 100, 100);
+	}
 	mlx_loop(screen);
 	return (0);
 }

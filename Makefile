@@ -2,7 +2,7 @@ NAME		=	so_long
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -lmlx -lXext -lX11 -I.
 RM			=	rm -rf
-SRC			=	main image
+SRC			=	main image walls
 SRCS		=	$(addsuffix .c, $(SRC))
 OBJ_DIR		=	obj
 OBJS		=	$(addprefix $(OBJ_DIR)/, $(SRC:=.o))
