@@ -40,11 +40,11 @@ char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	if (ft_strlen_gnl(s) < (size_t)start)
+	if (ft_strlen(s) < (size_t)start)
 		return (NULL);
 	src = (char *)s + start;
-	if (ft_strlen_gnl(src) < len)
-		reslen = ft_strlen_gnl(src) + 1;
+	if (ft_strlen(src) < len)
+		reslen = ft_strlen(src) + 1;
 	else
 		reslen = len + 1;
 	res = malloc(reslen * sizeof(char));
@@ -82,10 +82,10 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	{
 		s1 = malloc(sizeof(char) + 1);
 		if (!s1)
-			return (ft_free_gnl(&s1));
+			return (NULL);
+		s1[0] = 0;
 	}
-	str = (char *)malloc(sizeof(char) * ft_strlen_gnl(s1)
-			+ ft_strlen_gnl(s2) + 1);
+	str = (char *)malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!str)
 	{
 		return (ft_free_gnl(&s1));

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:11:46 by amashhad          #+#    #+#             */
-/*   Updated: 2024/12/07 00:53:03 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/01/24 00:10:57 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_free_gnl(char **str)
 	return (NULL);
 }
 
-static char	*clean_storage(char *line)
+char	*clean_storage(char *line)
 {
 	char	*new_line;
 	char	*ptr;
@@ -35,14 +35,14 @@ static char	*clean_storage(char *line)
 		len = (ptr - line) + 1;
 	if (!line[len])
 		return (ft_free_gnl(&line));
-	new_line = ft_substr_gnl(line, len, ft_strlen_gnl(line) - len);
+	new_line = ft_substr_gnl(line, len, ft_strlen(line) - len);
 	ft_free_gnl(&line);
 	if (!new_line)
 		return (NULL);
 	return (new_line);
 }
 
-static char	*new_buf(char *line)
+char	*new_buf(char *line)
 {
 	char	*buf;
 	char	*ptr;
@@ -56,7 +56,7 @@ static char	*new_buf(char *line)
 	return (buf);
 }
 
-static char	*readbuf(int fd, char *line)
+char	*readbuf(int fd, char *line)
 {
 	int		byte;
 	char	*buffer;
