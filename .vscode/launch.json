@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/amashhad/Core_Projects/so_long",
-      "program": "/home/amashhad/Core_Projects/so_long/build/Debug/outDebug",
+      "cwd": "/home/amashhad/Core_Projects/So_long_testing/test",
+      "program": "/home/amashhad/Core_Projects/So_long_testing/test/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   close_reopen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 21:10:33 by amashhad          #+#    #+#             */
-/*   Updated: 2024/09/09 21:10:40 by amashhad         ###   ########.fr       */
+/*   Created: 2025/02/15 01:26:20 by amashhad          #+#    #+#             */
+/*   Updated: 2025/02/15 01:29:59 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+#include "so_long.h"
+
+int		close_reopen(int fd, char *map)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	close (fd);
+	fd = open(map, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	return (fd);
 }

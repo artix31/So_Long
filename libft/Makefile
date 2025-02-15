@@ -32,6 +32,7 @@ SRC	=	ft_atoi ft_bzero			\
 		ft_putstr ft_putuns			\
 		ft_putvoid ft_putitox			\
 		get_next_line get_next_line_utils	\
+		ft_atol ft_isspace		\
 
 SRCS	= $(addsuffix .c, $(SRC))
 OBJ_DIR	= obj

@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   identifiers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amashhad <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/05 02:15:40 by amashhad          #+#    #+#             */
-/*   Updated: 2024/09/05 02:15:42 by amashhad         ###   ########.fr       */
+/*   Created: 2025/02/15 05:09:18 by amashhad          #+#    #+#             */
+/*   Updated: 2025/02/15 05:43:08 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_isdigit(int digit)
+int	ft_identifiers(char c)
 {
-	if (digit >= 48 && digit <= 57)
+	if ((c == '1') || (c == '0') || (c == 'P') || (c == 'E') || (c == 'C') || (c == '\n'))
 		return (1);
 	else
 		return (0);

@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/25 03:23:54 by amashhad          #+#    #+#             */
-/*   Updated: 2025/01/28 05:51:54 by amashhad         ###   ########.fr       */
+/*   Created: 2025/02/08 00:20:24 by amashhad          #+#    #+#             */
+/*   Updated: 2025/02/10 01:18:10 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-typedef struct s_list
+int	ft_isspace(int c)
 {
-	int	x;
-	int	y;
-	struct s_list *next;
-}			t_list;
-
-int	main()
-{
-	t_list	test;
-
-	test.x = 1;
-	test.y = 2;
-	int	i = 10;
-	while (i > 0)
-	{
-		test.x++;
-		test.y--;
-		printf("x:%d\ny:%d\n", test.x, test.y
-		test.x = );
-		i--;
-	}
+	if ((c == '\f') || (c == '\n') || (c == '\r')
+		|| (c == '\t') || (c == '\v')
+		|| (c == ' '))
+		return (1);
+	return (0);
 }
