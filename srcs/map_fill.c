@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:16:14 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/15 06:21:13 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/16 00:51:49 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,59 +15,52 @@
 int		check_row_size(int fd)
 {
 	char	*line;
-	int		size1;
-	int		size2;
+	size_t	size;
+	size_t	curr;
 
-	size1 = 0;
-	size2 = 0;
 	line = get_next_line(fd);
 	if (!line)
 		return (0);
-	size1 = ft_strlen(line);
-	while (line && *line != '\0')
+	size = ft_strlen(line);
+	if (line[size - 1] == '\n')
+		size--;
+	if (size < 3)
+		return (ft_freeall(NULL, NULL, line, 0));
+	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
 		if (!line)
-			return (1);
-		size2 = ft_strlen(line);
-		if (size1 != size2)
-		{
-			free(line);
-			return (0);
-		}
-		size1 = size2;
+			break ;
+		curr = ft_strlen(line);
+		if (line[curr - 1] == '\n')
+			curr--;
+		if (size != curr)
+			return (ft_freeall(NULL, NULL, line, 0));
 	}
-	return (0);
+	return (size);
 }
 
 int		row_nb(int fd, char *map)
 {
-	static int		i;
-	static int		size;
+	int		i;
 	char		*line;
 
+	i = 0;
 	line = get_next_line(fd);
 	if (!line)
 		return (0);
-	while (line && *line != '\0')
+	while (line)
 	{
-		size = ft_strlen(line);
-		if (size < 3)
-		{
-			free(line);
-			return(0);
-		}
+		if (ft_strlen(line) < 3)
+			return (ft_freeall(NULL, NULL, NULL, 0));
 		i++;
 		free(line);
 		line = get_next_line(fd);
-		if (!line)
-		{
-			close_reopen(fd, map);
-			return (i);
-		}
 	}
-	return (0);
+	close_reopen(fd, map);
+	//ft_printf("\n\n%d\n\n", i);
+	return (i);
 }
 
 int	find_player(char **map, t_player *player)
@@ -90,7 +83,10 @@ int	find_player(char **map, t_player *player)
 				player->count += 1;
 			}
 			if (player->count > 1)
+			{
+				ft_putchar('1');
 				return (0);
+			}
 			j++;
 		}
 		j = 0;
@@ -99,73 +95,61 @@ int	find_player(char **map, t_player *player)
 	return (1);
 }
 
-int	floodchars(int fd, char *file, t_player *player)
+int	floodchars(int fd, t_player *player, t_maps *maps)
 {
 	char	*line;
+	char	*temp = NULL;
 	char	**map;
-	static int	i;
-	//int			j;
 
-	map = malloc(sizeof(map) * row_nb(fd, file));
-	if (!map)
-		return (0);
+	(void) player;
 	line = get_next_line(fd);
 	if (!line)
-		return (0);
-	//j = ft_strlen(line);
-	while (line && *line != '\0')
+		return (ft_freeall(NULL, NULL, line, 0));
+	while (line)
 	{
-		map[i] = ft_strdup(line);
-		if (!map[i])
-		{
-			ft_farray(map);
-			free(line);
-			return (0);
-		}
+		temp = ft_strjoin_gnl(temp, line);
 		free(line);
 		line = get_next_line(fd);
-		i++;
 	}
-	map[i] = '\0';
+	map = ft_split(temp, '\n');
+	if (!map)
+		ft_freeall(NULL, NULL, temp, 0);
+	free(temp);
 	if (!find_player(map, player))
 		return (0);
-	if (floodfill(&map, player->x_p, player->y_p) == 0)
-		i = 0;
-	ft_farray(map);
-	return (i);
+	maps->rows = ft_count_rows(map);
+	maps->cols = ft_strlen(map[0]);
+	if (map_border_chk1(map, maps->rows, maps->cols) == 0)
+		return (ft_freeall(NULL, map, line, 0));
+	if (floodfill(map, player->x_p, player->y_p, maps) == 0)
+		return (ft_freeall(NULL, map, line, 0));
+	else
+		return (ft_freeall(NULL, map, line, 1));
+	return (1);
 }
 
-int		fill_map(char *line, t_player *player)
+int		fill_map(char *line, t_player *player, t_maps *maps)
 {
 	int		fd;
-	int		rows;
+	static int		rows;
 
-	rows = 0;
-	//find row nb + check valid row size (size > 2)//
 	fd = open(line, O_RDONLY);
 	if (fd < 0)
 		return (0);
 	rows = row_nb(fd, line);
 	if (rows < 3)
 	{
-		ft_putstr("row nb\n");
 		close(fd);
 		return (0);
 	}
-	//------------------//
-	//check row size//
 	if (check_row_size(fd) == 0)
 	{
-		ft_putstr("row size\n");
 		close (fd);
 		return (0);
 	}
-	//-----------------//
-	//check line validity + floodfill//
 	fd = close_reopen(fd, line);
-	if (floodchars(fd, line, player) == 0)
+	if (floodchars(fd, player, maps) == 0)
 	{
-		ft_putstr("floodchars\n");
 		close(fd);
 		return (0);
 	}

@@ -1,8 +1,9 @@
 NAME		=	so_long
 CC		=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror
 RM		=	rm -rf
-SRC		= 	so_long map_fill map_format_chk arr_floodfill close_reopen identifiers
+SRC		= 	so_long map_fill map_format_chk arr_floodfill close_reopen \
+			identifiers ft_free_all initialize_everything
 SRC_DIR		= 	srcs
 SRCS		=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC)))
 OBJ_DIR		=	obj

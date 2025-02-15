@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:25:18 by amashhad          #+#    #+#             */
-/*   Updated: 2025/01/28 16:30:20 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/15 06:53:34 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	ft_farray(char	**arr)
 	int		i;
 
 	i = 0;
-	while (arr[i])
+	if (!arr)
+		return ;
+	while (arr && arr[i])
 	{
 		free(arr[i]);
 		arr[i] = NULL;

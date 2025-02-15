@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_format_chk.c                                   :+:      :+:    :+:   */
+/*   initialize_everything.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 17:28:02 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/15 11:01:33 by amashhad         ###   ########.fr       */
+/*   Created: 2025/02/15 13:57:11 by amashhad          #+#    #+#             */
+/*   Updated: 2025/02/16 02:23:51 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int		chk_format(char *map_name)
+void	init_maps(t_maps *maps)
 {
-	if (ft_strrchr(map_name, '.'))
-	{
-				if (ft_strncmp(ft_strrchr(map_name, '.'), ".ber\n", 4) == 0)
-			return (1);
-		else
-			return (0);
-	}
-	else
-		return (0);
+	maps->rows = 0;
+	maps->cols = 0;
+	maps->exits = 0;
+	maps->players = 0;
+	maps->collectibles = 0;
+}
+void	init_player(t_player *player)
+{
+	player->x_p = 0;
+	player->y_p = 0;
+	player->count = 0;
 }
