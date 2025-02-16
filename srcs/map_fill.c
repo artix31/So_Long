@@ -6,27 +6,28 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:16:14 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/16 08:16:21 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/17 01:46:23 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int		final_chk(char **map, t_maps *maps)
+int		final_chk(char **map, t_game *game)
 {
 	int		x;
 	int		y;
 
 	x = 0;
 	y = 0;
-	while (x < maps->rows)
+	while (x < game->map.rows)
 	{
-		while (y < maps->cols)
+		while (y < game->map.cols)
 		{
 			if ((map[x][y] != '1') && (map[x][y] != 'F'))
 			{
 				if (map[x][y] != '0')
 				{
+					ft_putchar(map[x][y]);
 					return (0);
 				}
 			}
@@ -80,7 +81,7 @@ int	find_player(char **map, t_player *player)
 	}
 		return (player->count);
 }
-char	*fill_tmp(int fd, t_maps *maps)
+char	*fill_tmp(int fd, t_game *game)
 {
 	char	*line;
 	char	*temp;
@@ -91,9 +92,9 @@ char	*fill_tmp(int fd, t_maps *maps)
 		return (NULL);
 	while (line)
 	{
-		maps->cols = col_size(line);
-		maps->rows += 1;
-		if (!(maps->cols))
+		game->map.cols = col_size(line);
+		game->map.rows += 1;
+		if (!(game->map.cols))
 			ft_freeall(fd, NULL, temp, 0);
 		temp = ft_strjoin_gnl(temp, line);
 		free(line);
@@ -102,7 +103,7 @@ char	*fill_tmp(int fd, t_maps *maps)
 	return (temp);
 }
 
-int	map_chk_create(int	fd, char *line, t_player *player, t_maps *maps)
+int	map_chk_create(int	fd, char *line, t_game *game)
 {
 	char	*temp;
 	char	**atemp;
@@ -110,23 +111,23 @@ int	map_chk_create(int	fd, char *line, t_player *player, t_maps *maps)
 	fd = open(line, O_RDONLY);
 	if (fd < 0)
 		return (0);
-	temp = fill_tmp(fd, maps);
+	temp = fill_tmp(fd, game);
 	if (!temp)
-		return (ft_freeall(fd, NULL, NULL, 0));
-	maps->map = ft_split(temp, '\n');
-	if (!maps->map)
-		return (ft_freeall(fd, NULL, temp, 0));
-	atemp = ft_cpyarr(maps->map);
+		return (ft_freeall(fd, NULL, NULL, 8));
+	game->map.map = ft_split(temp, '\n');
+	if (!game->map.map)
+		return (ft_freeall(fd, NULL, temp, 7));
+	atemp = ft_cpyarr(game->map.map);
 		if (!atemp)
-			return(ft_freeall(fd, maps->map, NULL, 0));
+			return(ft_freeall(fd, game->map.map, temp, 6));
 	free(temp);
-	if (!find_player(maps->map, player))
-		return (ft_freeall(fd, maps->map, NULL, 0));
-	if (!map_border_chk1(maps->map, maps->cols, maps->rows))
-		return (ft_freeall(fd, maps->map, NULL, 0));
-	if (!floodfill(maps->map, player->x_p, player->y_p, maps))
-		return (ft_freeall(fd, maps->map, NULL, 0));
-	if (!final_chk(maps->map, maps))
-		return (ft_freeall(fd, maps->map, NULL, 0));
-	return (ft_freeall(fd, maps->map, NULL, 1));
+	if (!find_player(game->map.map, &game->player))
+		return (ft_freeall(fd, atemp, NULL, 2));
+	if (!map_border_chk1(game->map.map, game->map.cols, game->map.rows))
+		return (ft_freeall(fd, atemp, NULL, 3));
+	if (!floodfill(atemp, game->player.x_p, game->player.y_p, game))
+		return (ft_freeall(fd, atemp, NULL, 4));
+	if (!final_chk(atemp, game))
+		return (ft_freeall(fd, atemp, NULL, 5));
+	return (ft_freeall(fd, atemp, NULL, 1));
 }

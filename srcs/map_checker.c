@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arr_floodfill.c                                    :+:      :+:    :+:   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 00:26:30 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/16 08:09:36 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/17 01:45:29 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 int		map_border_chk2(char **map, int cols, int rows)
 {
@@ -54,23 +53,23 @@ int		map_border_chk1(char **map, int cols, int rows)
 	return (map_border_chk2(map, cols, rows));
 }
 
-int		floodfill(char **map, int x, int y, t_maps *maps)
+int		floodfill(char **map, int x, int y, t_game *game)
 {
-	if (map[x][y] == 'F' || x >= maps->rows ||
-		y >= maps->cols || x < 0 || y < 0 || map[x][y] == '1')
+	if (map[x][y] == 'F' || x >= game->map.rows ||
+		y >= game->map.cols || x < 0 || y < 0 || map[x][y] == '1')
 			return (1);
 	if (map[x][y] == 'E')
-		maps->exits++;
+		game->map.exits++;
 	if (map[x][y] == 'C')
-		maps->collectibles++;
+		game->map.collectibles++;
 	map[x][y] = 'F';
-	floodfill(map, x - 1, y, maps);
-	floodfill(map, x, y + 1, maps);
-	floodfill(map, x + 1, y, maps);
-	floodfill(map, x, y - 1, maps);
-	if (maps->exits != 1)
+	floodfill(map, x - 1, y, game);
+	floodfill(map, x, y + 1, game);
+	floodfill(map, x + 1, y, game);
+	floodfill(map, x, y - 1, game);
+	if (game->map.exits != 1)
 		return (0);
-	if (maps->collectibles < 1)
+	if (game->map.collectibles < 1)
 		return (0);
 	return (1);
 }

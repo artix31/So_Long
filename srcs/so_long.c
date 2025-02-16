@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:21:02 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/16 08:17:05 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/17 02:06:00 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,25 @@
 
 int		main(int argc, char **argv)
 {
-	t_maps		maps;
-	t_player	player;
+	t_game		game;
 	int			fd;
+	int			exit;
 
 	fd = 0;
-	init_maps(&maps);
-	init_player(&player);
 	if (argc != 2)
 		return (write(2, "Wrong Input\n", 13));
 	if (!chk_format(argv[1]))
 		return (write(2, "Wrong Map format\n", 18));
-	if (!map_chk_create(fd, argv[1], &player, &maps))
-		return (write(2, "Wrong Map Size\n", 16));
+	init_maps(&game);
+	init_player(&game);
+	exit = map_chk_create(fd, argv[1], &game);
+	if (exit != 1)
+	{
+		ft_farray(game.map.map);
+		write(1, "map_chk_create\n", 16);
+		return (exit);
+	}
+	game_start(&game);
+	ft_farray(game.map.map);
 return (1);
 }
