@@ -16,7 +16,7 @@ LIBFT		=	$(LIBFT_PATH)/libft.a
 all:	$(NAME)
 
 $(NAME):	$(OBJS) $(LIBFT)
-		$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -o $(NAME) -lmlx -lX11 -lXext -lm
+		$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -o $(NAME) -lmlx -lX11 -lXext -lm -L$(LIBFT_PATH) -lft
 $(OBJ_DIR):
 			mkdir -p $(OBJ_DIR)
 

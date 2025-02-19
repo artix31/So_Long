@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:28:02 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/19 12:27:10 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/19 19:23:54 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,14 @@ int	chk_format(int argc, char *map_name)
 		if (ft_strncmp(ft_strrchr(map_name, '.'), ".ber\n", 4) == 0)
 			return (1);
 		else
+		{
+			write(2, "Wrong Extension\n", 17);
 			exit (1);
+		}
 	}
 	else
+	{
+		ft_putstr_fd("No Extension Found\n", 2);
 		exit (1);
+	}
 }
