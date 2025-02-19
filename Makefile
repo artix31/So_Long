@@ -3,7 +3,8 @@ CC		=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 RM		=	rm -rf
 SRC		= 	so_long map_fill identification map_checker \
-			 ft_free_all initialize_everything game
+			 ft_free_all initialize_everything game\
+			 image_load dynamic_inits map movements
 SRC_DIR		= 	srcs
 SRCS		=	$(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC)))
 OBJ_DIR		=	obj
@@ -15,7 +16,7 @@ LIBFT		=	$(LIBFT_PATH)/libft.a
 all:	$(NAME)
 
 $(NAME):	$(OBJS) $(LIBFT)
-		$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -o $(NAME) -lmlx -lXext -lX11
+		$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -o $(NAME) -lmlx -lX11 -lXext -lm
 $(OBJ_DIR):
 			mkdir -p $(OBJ_DIR)
 

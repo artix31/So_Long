@@ -6,13 +6,13 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 08:24:53 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/16 08:42:21 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/17 08:42:55 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		arr_size(char **arr)
+int	arr_size(char **arr)
 {
 	int		i;
 
@@ -23,6 +23,7 @@ int		arr_size(char **arr)
 		i++;
 	return (i);
 }
+
 char	**ft_cpyarr(char **arr)
 {
 	int		size;
