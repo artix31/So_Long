@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:16:14 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/19 10:13:56 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:31:53 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*fill_tmp(int fd, t_game *game)
 		game->map.cols = col_size(line);
 		game->map.rows++;
 		if ((game->map.cols) == 0)
-			ft_freeall_fd(fd, line, NULL, 2);
+			ft_freeall_fd(fd, line, temp, 2);
 		temp = ft_strjoin_gnl(temp, line);
 		if (!temp)
 			ft_freeall_fd(fd, line, NULL, 2);
@@ -119,7 +119,7 @@ int	map_chk_create(int fd, char *line, t_game *game)
 		ft_freeall(NULL, game, temp, 2);
 	game->map.atemp = ft_cpyarr(game->map.map);
 	if (!game->map.atemp)
-		ft_freeall(game->map.map, game, temp, 2);
+		ft_freeall(NULL, game, temp, 2);
 	free(temp);
 	find_player(game);
 	map_border_chk1(game);

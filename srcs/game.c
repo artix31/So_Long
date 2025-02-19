@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 09:46:08 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/19 10:01:47 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:49:02 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	win_exit(t_game *game)
 
 int	key_press(int keycode, t_game *game)
 {
-	if (keycode == XK_Escape)
+	if (keycode == XK_Escape || keycode == XK_q)
 		win_exit(game);
 	if (keycode == XK_Up ||  keycode == XK_w)
 		player_movement(game, game->player.x_p - 1, game->player.y_p);

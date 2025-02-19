@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 13:57:11 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/19 10:13:07 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:46:38 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static	void	init_player(t_player *player)
 	player->img = NULL;
 	player->x_p = 0;
 	player->y_p = 0;
-	player->movements = -2;
+	player->movements = 0;
 	player->count = 0;
 	player->exit_cnt_x = 0;
 	player->exit_cnt_y = 0;

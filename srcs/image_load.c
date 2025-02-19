@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:21:45 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/19 10:41:21 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:42:05 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,23 @@ void init_imgs(t_game *game)
 	game->img.collect = mlx_xpm_file_to_image(game->mlx.mlx,
 			"./assets/wicked/Collect.xpm", &width, &height);
 	if (!game->img.collect)
-		omni_free("Collect_img_fail\n", game, 6);
+		omni_free("vvvCollect_img_failvvv\n", game, 6);
 	game->img.exit = mlx_xpm_file_to_image(game->mlx.mlx,
 			"./assets/wicked/Exit.xpm", &width, &height);
 	if (!game->img.exit)
-		omni_free("Exit_img_fail\n", game, 6);
+		omni_free("vvvExit_img_failvvv\n", game, 6);
 	game->img.floors = mlx_xpm_file_to_image(game->mlx.mlx,
 			"./assets/wicked/Diamonds_green.xpm", &width, &height);
 	if (!game->img.floors)
-		omni_free("Floor_img_fail\n", game, 6);
+		omni_free("vvvFloor_img_failvvv\n", game, 6);
 	game->img.walls = mlx_xpm_file_to_image(game->mlx.mlx,
 			"./assets/wicked/Spades_green.xpm", &width, &height);
 	if (!game->img.walls)
-		omni_free("Wall_img_fail\n", game, 6);
+		omni_free("vvvWall_img_failvvv\n", game, 6);
 	game->player.img = mlx_xpm_file_to_image(game->mlx.mlx,
 			"./assets/wicked/Wicked.xpm", &width, &height);
 	if (!game->player.img)
-		omni_free("Player_img_set_error\n", game, 6);
+		omni_free("vvvPlayer_img_set_errorvvv\n", game, 6);
 }
 
 void	load_mlx(t_game *game)
@@ -74,8 +74,8 @@ void	load_mlx(t_game *game)
 	game->mlx.mlx = mlx_init();
 	if (!game->mlx.mlx)
 		ft_freeall(NULL, game, NULL, 6);
-	game->mlx.win = mlx_new_window(game->mlx.mlx, 64 * (game->map.rows + 1), 62
-			* (game->map.cols - 1), "test");
+	game->mlx.win = mlx_new_window(game->mlx.mlx, 64 * game->map.cols, 62
+			* game->map.rows, "Sphere of the BLACKHOLE!!!!");
 	if (!game->mlx.win)
 		omni_free("window_mlx_fail\n", game, 6);
 }
