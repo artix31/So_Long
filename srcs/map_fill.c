@@ -6,7 +6,7 @@
 /*   By: amashhad <amashhad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:16:14 by amashhad          #+#    #+#             */
-/*   Updated: 2025/02/19 19:23:14 by amashhad         ###   ########.fr       */
+/*   Updated: 2025/02/21 01:51:55 by amashhad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ int	map_chk_create(int fd, char *line, t_game *game)
 	fd = open(line, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("wrong file\n", 2);
-		exit (0);
+		ft_putstr_fd("Error Opening File\n", 2);
+		exit (1);
 	}
 	temp = fill_tmp(fd, game);
 	close(fd);
